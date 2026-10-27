@@ -1,0 +1,29 @@
+name: Problem report
+description: Something in Parallax does not work. Paste the text from Help → Copy Diagnostics.
+labels: [beta]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for testing Parallax. Please do not paste secrets, tokens or personal data: Copy Diagnostics already removes them, but check before you send.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened and what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+  - type: input
+    id: rn
+    attributes:
+      label: React Native version, Expo or bare, and the agent (Claude Code / Codex) with its version
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics (Help → Copy Diagnostics in the Parallax app)
+      render: text
+    validations:
+      required: true

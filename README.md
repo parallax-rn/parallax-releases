@@ -6,3 +6,6 @@ Signed and notarized builds of the Parallax desktop app (macOS, Apple silicon, m
 - Update feeds read by the app: `feeds/stable.json` and `feeds/beta.json`.
 
 Parallax is free to use under its license agreement, shown when the app first starts.
+
+## Report a problem
+Open an [issue](https://github.com/parallax-rn/parallax-releases/issues/new/choose) and paste the text from **Help → Copy Diagnostics** in the Parallax app.
