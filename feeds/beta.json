@@ -1,0 +1,15 @@
+{
+  "currentRelease": "0.1.0-beta.2",
+  "releases": [
+    {
+      "version": "0.1.0-beta.2",
+      "updateTo": {
+        "version": "0.1.0-beta.2",
+        "pub_date": "2026-11-03T17:26:22.929Z",
+        "notes": "",
+        "name": "0.1.0-beta.2",
+        "url": "https://github.com/parallax-rn/parallax-releases/releases/download/v0.1.0-beta.2/Parallax-0.1.0-beta.2-arm64.zip"
+      }
+    }
+  ]
+}
