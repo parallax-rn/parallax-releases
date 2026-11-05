@@ -1,14 +1,14 @@
 {
-  "currentRelease": "0.1.0-beta.4",
+  "currentRelease": "0.1.0-beta.5",
   "releases": [
     {
-      "version": "0.1.0-beta.4",
+      "version": "0.1.0-beta.5",
       "updateTo": {
-        "version": "0.1.0-beta.4",
-        "pub_date": "2026-11-04T13:55:33.087Z",
+        "version": "0.1.0-beta.5",
+        "pub_date": "2026-11-05T10:09:07.416Z",
         "notes": "",
-        "name": "0.1.0-beta.4",
-        "url": "https://github.com/parallax-rn/parallax-releases/releases/download/v0.1.0-beta.4/Parallax-0.1.0-beta.4-arm64.zip"
+        "name": "0.1.0-beta.5",
+        "url": "https://github.com/parallax-rn/parallax-releases/releases/download/v0.1.0-beta.5/Parallax-0.1.0-beta.5-arm64.zip"
       }
     }
   ]
