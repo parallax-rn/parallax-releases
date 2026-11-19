@@ -1,0 +1,41 @@
+{
+  "_comment": "Amendment 1 to R3's pre-registration (r3-prereg.json, frozen 2026-11-18, published 2026-11-19), written after Błażej Kustra's remarks on the method and before any counted run. It changes only what is listed under 'changes'; every hypothesis, threshold, task and other field stays as frozen.",
+  "amends": { "file": "r3-prereg.json", "sha256": "2dbc9f03611de427851f82d5e425bc4030d930e1279c21bb135c98473a6dbfe8", "frozen": "2026-11-18" },
+  "written": "2026-11-19",
+  "beforeFirstCountedRun": true,
+  "changes": {
+    "gestures.repeated": {
+      "was": "same kind, same target or a start point within 20 pt, no edit and no reload in between; each extra call once; how many repeats then landed is reported",
+      "now": "a gesture call of the same kind as an earlier one, on the same target or from a start point within 20 pt, with no edit and no reload in between, counts as repeated when that earlier call failed or did not change the run's screen recording (the comparison 'unconfirmed' uses); each extra call once; how many repeats then changed the screen recording is reported (landed). With no recording to read, the call counts as repeated",
+      "why": "A tool without a scroll-until action (Argent on iOS, Parallax, AXe without --until-id) scrolls a list with several identical swipes from one point; under the first definition each swipe after the first counted as a repeat although it moved the list. 'Landed' read from each tool's own answer was not comparable either: Argent reports errors only. The recording is the same for every arm."
+    },
+    "gestures.continued": {
+      "now": "the same match after an earlier call that changed the screen recording; reported per task and arm on its own row, in every arm; not part of 'repeated'"
+    },
+    "H1": {
+      "note": "the thresholds are unchanged; its 'failed + repeated gesture calls' reads 'repeated' as defined above"
+    },
+    "gestures.kinds.argent": {
+      "scroll": "none on iOS: gesture-scroll is a mouse wheel for Chromium and Mac apps; Argent scrolls with gesture-swipe, counted as swipe; a gesture-scroll call on the simulator counts as a failed scroll",
+      "drag": "gesture-custom with moves; gesture-drag is a mouse drag for Chromium and Mac apps; a gesture-drag call on the simulator counts as a failed drag",
+      "points": "Argent's coordinates are fractions of the screen and are converted to points (iPhone 17 Pro, 402 x 874) before the 20 pt and frame tests (as the harness did already)"
+    },
+    "sameForEveryArm": {
+      "add": "the Mac on a Latin keyboard layout (ABC) for every arm: Argent 0.34.0's keyboard patch appears to make the simulator follow the Mac's layout (with a Russian layout on the Mac, ru_RU appeared on the simulator 20 s into Argent's first cold-start sample on 2026-11-19); the preflight stops a run when the Mac is not on ABC or US or the simulator has a non-Latin keyboard, and a non-Latin keyboard a run leaves on the simulator is taken out before the reboot that precedes the check; each run records the Mac's layout and any keyboard taken out"
+    },
+    "order": {
+      "note": "Błażej Kustra confirmed that Argent's server is stopped after each run, as in R1, so A2's runs stay in the shared shuffled order; no Argent block"
+    },
+    "remapOnCutoff": {
+      "note": "re-read on the cut-off day against Argent 0.34.0's tools/list: 70 tools, native-user-interactable-view-at-point removed (not a gesture); no change to the gesture table other than the Argent column above. agent-device 0.21.39 and Parallax 0.1.0-beta.13: unchanged"
+    }
+  },
+  "pinned": {
+    "_note": "the pin taken by the rule on 2026-11-19 at 08:30 UTC, for the record (not a change)",
+    "@anthropic-ai/claude-code": "2.1.328",
+    "agent-device": "0.21.39",
+    "@swmansion/argent": "0.34.0",
+    "@parallax-rn/mcp": "0.1.0-beta.13",
+    "axe": "2.0.4 (GitHub cameroncooke/AXe v2.0.4, AXe-macOS-v2.0.4-universal.tar.gz sha256 3178ec66d9ff46455fec737debad719c41cab16edb1435b2c721e07760a208c3)"
+  }
+}
