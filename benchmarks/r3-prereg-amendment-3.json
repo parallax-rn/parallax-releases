@@ -1,0 +1,35 @@
+{
+  "_comment": "Amendment 3 to R3's pre-registration (r3-prereg.json, frozen 2026-11-18, published 2026-11-19; amendments 1 and 2 published 2026-11-19), written during the first counted session, after 8 counted runs and 2 set-aside runs. It changes only what is listed under 'changes'; every hypothesis, threshold and other field stays as frozen and as amendments 1 and 2 left it. It is a deviation: the scan rule changed after counted runs had been made. It is the same for every arm and only loosens the scan; no run that counted is affected.",
+  "amends": {
+    "file": "r3-prereg.json",
+    "sha256": "2dbc9f03611de427851f82d5e425bc4030d930e1279c21bb135c98473a6dbfe8",
+    "frozen": "2026-11-18",
+    "after": [
+      { "file": "r3-prereg-amendment-1.json", "sha256": "16348032a3cc183da771356fb643665beda0933ca15e4c68f79f1a135ad91261" },
+      { "file": "r3-prereg-amendment-2.json", "sha256": "dae12cd574404d6022c9251f5ac1e0196db5ef8035b81b100494e918178edecf" }
+    ]
+  },
+  "written": "2026-11-19",
+  "beforeFirstCountedRun": false,
+  "afterCountedRuns": 8,
+  "changes": {
+    "notCounted.scan": {
+      "was": "a run the transcript scan flags (git use, a path outside the app, a key file's name): every line of the transcript, the tools' answers included, checked for git use, a scratchpad path and the note names (the bench's private folders and file names)",
+      "now": "git use and scratchpad paths: every line, as before. A note name: only where the agent itself put it into a tool call (a command, a path, a pattern or any other input of a call, a subagent's calls included), not in text a tool returned from inside the app folder. Reading a private path (for example printing the base app's source, or listing the bench's results) is a call input and is still flagged.",
+      "why": "On G5 (pull to refresh) the Parallax agent searched its whole project for RefreshControl. The search reached the app's own ios/Pods, whose 693 build files (React-VFS.yaml, the xcconfigs) carry the base app's build path, which contains the note name of the base app's folder. The agent never asked for a path outside the app, but the line rule flagged the run. It flagged G5 x A3 twice, and it would flag every run of any arm whose agent searches the native code: G5 could be set aside without end, and its sample would lean against agents that search the native code. The frozen text says 'a path outside the app'; a path quoted from the app's own files is not one."
+    }
+  },
+  "setAside": {
+    "_note": "set aside under the frozen rule, listed with the results, and run again under this amendment (their cells get a counted run, as notCountedRule says); they stay uncounted although the new scan would not flag them",
+    "runs": [
+      { "cell": "G5 x A3, n3", "reason": "note-name flag from the app's ios/Pods build path in a Grep answer", "flagsUnderNewScan": 0 },
+      { "cell": "G5 x A3, n2", "reason": "the same", "flagsUnderNewScan": 0 }
+    ]
+  },
+  "countedRunsRescanned": {
+    "_note": "the 8 counted runs made before this amendment, scanned again under the new rule: none changes",
+    "runs": ["G4 x A3 n3", "G6 x A2 n1", "G4 x A0 n2", "G6 x A2 n2", "G6 x A1 n2", "G4 x A3 n1", "G2 x A3 n3", "B4 x A0 n1"],
+    "flagsBefore": 0,
+    "flagsAfter": 0
+  }
+}
