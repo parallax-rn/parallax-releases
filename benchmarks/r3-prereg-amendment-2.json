@@ -1,0 +1,40 @@
+{
+  "_comment": "Amendment 2 to R3's pre-registration (r3-prereg.json, frozen 2026-11-18, published 2026-11-19; amendment 1 published 2026-11-19), written after the uncounted pilot and before any counted run. It changes only what is listed under 'changes'; every hypothesis, threshold and other field stays as frozen and as amendment 1 left it.",
+  "amends": {
+    "file": "r3-prereg.json",
+    "sha256": "2dbc9f03611de427851f82d5e425bc4030d930e1279c21bb135c98473a6dbfe8",
+    "frozen": "2026-11-18",
+    "after": { "file": "r3-prereg-amendment-1.json", "sha256": "16348032a3cc183da771356fb643665beda0933ca15e4c68f79f1a135ad91261" }
+  },
+  "written": "2026-11-19",
+  "beforeFirstCountedRun": true,
+  "changes": {
+    "gestures.wrongTarget": {
+      "was": "start point outside the frozen frame of the task's element, or a selector naming another element; refs resolved from the snapshot before the call; unresolvable calls counted as unknown, never as right",
+      "now": "the same, except that in G2, G3 and G4 the task's element is a class: G2 any cart row (cart/row/*), G3 any section's handle (sections/handle/*), G4 any product row (row/*, its texts included). A selector naming any element of the class, or the name of any product for G2 and G4, is right; one naming another element is wrong. A point is right inside the class's area read from the fixed app (G2: the cart's rows column from the first row's top to the screen's bottom; G3: the four handles; G4: the product rows' area, the list's frame) and wrong outside it. Unresolvable calls stay unknown, never right. The same for every arm.",
+      "why": "In the pilot every agent that swiped in G2 (A1, A2, A3) built its own cart and swiped one of its own rows; under the first definition each such swipe was judged wrong because it was not the harness's own row cart/row/p3. The metric then scored the agent's choice of test data, not whether the tool hit the element it aimed at. G3 and G4 have the same shape (any section, any product reproduces the bug). Wrong-target is a criterion of H2."
+    },
+    "tasks.keysSha256": {
+      "note": "G2, G3 and G4's key.json change only in their 'targets' (idPrefix, labels, frames, framesFrom; ids emptied); symptom, cause, where, cause_terms and check are unchanged. The frozen hashes are superseded:",
+      "superseded": {
+        "G2": "e5a7cf9b09bacf8fd5923275c4514ff623afd268441052eb5623127c9a74338d",
+        "G3": "6535f5e368057a82a9a7bafe258cd14478f060feaee79e8a4034ed25d88d9aa0",
+        "G4": "641970ca47af6985095d7aa825bdd52083b65e76def615ec05ba69c1d845e130"
+      },
+      "now": {
+        "G2": "e1990e4ddf85b22bc76e177f490f2cb1b318534788e328d8866b518759d4f6c2",
+        "G3": "8e2a3e358a4a541a3ebb73fb153c986b54661cc345b18874d3d0d5362281a8e2",
+        "G4": "9d19a1dd569443d77c907857adee4740958ca75ac9c1342b1bf0bde9156b1ba3"
+      },
+      "unchanged": "G1, G5, G6 and G7 (their targets are the list or the photos already)"
+    }
+  },
+  "pilot": {
+    "_note": "the uncounted pilot (G2 and G7, one run per arm, 2026-11-19 09:45 to 10:15 UTC), wrong-target per run as frozen and as amended (right/wrong/unknown); nothing else changes",
+    "G2 A1": { "frozen": "0/2/0", "amended": "1/1/0", "why": "first swipe at the screen's top edge (a miss, failed), second on a row of its own cart" },
+    "G2 A2": { "frozen": "0/1/0", "amended": "1/0/0" },
+    "G2 A3": { "frozen": "0/1/0", "amended": "1/0/0", "why": "swiped cart/row/p6 by id, a row of its own cart" },
+    "G2 A0, G7 A0..A3": { "frozen": "no gesture", "amended": "no gesture" },
+    "recorded": "G7 was fixed with no gesture in all four arms, and G2 in A0; the task rule decides on the counted runs"
+  }
+}
