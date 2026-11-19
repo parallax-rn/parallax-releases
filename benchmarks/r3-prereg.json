@@ -1,0 +1,156 @@
+{
+  "_comment": "Plan 0042, the pre-registration of benchmark R3, frozen 2026-11-18 before the first counted run and published before it (as R2's r2-prereg.json). R3 starts right after the method goes to the reviewers (Michał Pierzchała for agent-device, Błażej Kustra for Argent); a remark of theirs that changes a setup, warm start or scoring is applied, the affected cells are run again on the same pins, and the report lists it as a deviation. The maintainer's choices of 2026-11-18: AXe from its GitHub release, H1 and H2 with thresholds, Argent's server stopped after each run as in R1, the computed cold row. Medians over 3 runs per cell: a direction, not statistics. Task keys, bug files and causes stay private until the results; their sha256 is below. The method document is published with the results.",
+  "status": "FROZEN",
+  "frozen": "2026-11-18",
+  "model": "claude-sonnet-5-5",
+  "agent": "Claude Code, headless, stream-json, --permission-mode dontAsk; model claude-sonnet-5-5",
+  "device": "iOS simulator, iPhone 17 Pro, iOS 26.3; rebooted before every run",
+  "versions": {
+    "rule": "The cut-off day is the day this pre-registration is published; just before the first counted run Claude Code, agent-device, @swmansion/argent and @parallax-rn/mcp are pinned to the version their npm 'latest' dist-tag points to when the pin is taken (never nightly, next, canary or a local build); a release published to 'latest' before the pin is the one tested, one published after it is not; cells run again after a reviewer's remark use the same pins. The pin's time and each package's npm 'time' entry are recorded. AXe (not on npm) is pinned at the same time to its latest GitHub release (cameroncooke/AXe; never a pre-release or staging build), its universal tarball checked against the digest GitHub lists; the same AXe serves every arm's shell and the harness's check. AXe's `agent` command needs a TypeSafe API key that no arm has. Every run records the versions it used.",
+    "pinned": "just before the first counted run, by the rule above; the versions are recorded in the round's cutoff file and in every run's result, and reported with the results",
+    "preparationPinForReference": {
+      "_note": "the harness was prepared and checked on these (2026-11-18, 18:22 UTC); not the counted runs' pin, which is taken again by the rule",
+      "@anthropic-ai/claude-code": "2.1.327",
+      "agent-device": "0.21.39",
+      "@swmansion/argent": "0.33.0",
+      "@parallax-rn/mcp": "0.1.0-beta.13",
+      "axe": "2.0.4 (GitHub cameroncooke/AXe v2.0.4, AXe-macOS-v2.0.4-universal.tar.gz sha256 3178ec66d9ff46455fec737debad719c41cab16edb1435b2c721e07760a208c3)"
+    }
+  },
+  "arms": {
+    "A0": "shell only: the app's source, xcrun simctl and AXe; no device MCP",
+    "A1": "A0 plus agent-device (agent-device mcp and its skills); warm start: doctor, prepare ios-runner",
+    "A2": "A0 plus Argent (argent init: MCP server, skills, rules; telemetry off); warm start: server start --detach, status, one screenshot",
+    "A3": "A0 plus Parallax (MCP tools and skill via setup), no window; no warm start"
+  },
+  "sameForEveryArm": "subagents and Skill allowed; git, WebFetch and WebSearch denied; the account's Parallax skill hidden outside A3; isolated HOME with the real simulator list; 15 minutes and $5 per run; only the pinned tools are reachable: every PATH folder holding argent or agent-device is removed except the pins' own (node, npm, npx and corepack through links of their own), so A1 reaches only the pinned agent-device, A2 only the pinned Argent, A0 and A3 neither. A change from R1, whose PATH kept the machine's global Argent and agent-device behind the pins in every arm",
+  "tasks": {
+    "gesture": [
+      "G1",
+      "G2",
+      "G3",
+      "G4",
+      "G5",
+      "G6",
+      "G7"
+    ],
+    "controls": [
+      "C1",
+      "B4"
+    ],
+    "keysSha256": {
+      "G1": "d82d1f5dc405cf8eda5d6965c5911074848d15ec1b4d2831e5654517fe4f127a",
+      "G2": "e5a7cf9b09bacf8fd5923275c4514ff623afd268441052eb5623127c9a74338d",
+      "G3": "6535f5e368057a82a9a7bafe258cd14478f060feaee79e8a4034ed25d88d9aa0",
+      "G4": "641970ca47af6985095d7aa825bdd52083b65e76def615ec05ba69c1d845e130",
+      "G5": "69e4ad314c6f73a24fae12c69df12cd36522a0a92c09f1ac4ba04dbdc85c18ad",
+      "G6": "9ca2a64d74d3e526b7a91225d6cab82508ef6c7158bbdaa66850c296f5b8af34",
+      "G7": "6b8365691331201e4242dfe1529409d1e7336298d4d2fe76e336acb64375d56d"
+    },
+    "keysFrom": "each task's key.json, published with the results; the controls' keys are R1's, already published",
+    "expectedFromSource": [
+      "G4"
+    ]
+  },
+  "runsPerCell": 3,
+  "controlRunsPerArm": 1,
+  "pilot": "G2 and G7, one run per arm, not counted",
+  "order": "shuffled with a recorded seed, in 3 sessions at least 65 minutes apart; Argent's server is stopped after each run as in R1; only if Błażej Kustra asks for it to stay up between runs do A2's runs form their own block after the others, and the report says so",
+  "outcome": {
+    "0": "no cause, or a wrong cause; a run that hits a limit is 0 with 'limit' noted",
+    "1": "the right cause named (file and mechanism match the key)",
+    "2": "fixed: the harness's check passes",
+    "3": "fixed and checked by the agent itself on the device before it finished",
+    "confidentWrong": "a final answer that states a cause or a fix without hedging, with no right cause and no fix; counted on its own",
+    "blind": "the cause graded by a Sonnet subagent with the key that does not know the arm; the maintainer decides disagreements with the keyword score"
+  },
+  "cost": "Claude Code's own usage at list price, the run's own turn (not the session's cumulative total); the four token kinds each with their own median. Cost medians read warm runs; counts read every run. A run is cold when under half of its first model call's input came from the cache.",
+  "gestures": {
+    "gestureCall": "a call that moves a finger or holds it down (longpress, swipe, scroll, drag, pinch), through the tool or through AXe in the shell; taps count only for wrong-target actions",
+    "kinds": {
+      "tap": {
+        "axe": "tap, touch held < 400 ms, gesture double-tap/two-finger-tap",
+        "agentDevice": "press, click, gesture tap",
+        "argent": "gesture-tap, gesture-custom with no move",
+        "parallax": "device_tap"
+      },
+      "longpress": {
+        "axe": "touch --delay >= 0.4, tap --hold >= 0.4, gesture two-finger-hold",
+        "agentDevice": "longpress",
+        "argent": "gesture-custom: Down, wait >= 400 ms, Up",
+        "parallax": "device_tap with holdMs"
+      },
+      "swipe": {
+        "axe": "swipe, gesture swipe-from-*/two-finger-swipe",
+        "agentDevice": "swipe, gesture pan/swipe/fling",
+        "argent": "gesture-swipe",
+        "parallax": "device_swipe"
+      },
+      "scroll": {
+        "axe": "gesture scroll-*, swipe --until-id/--until-label",
+        "agentDevice": "scroll",
+        "argent": "gesture-scroll",
+        "parallax": null
+      },
+      "drag": {
+        "axe": "drag, draw, batch with a held touch-down and a swipe",
+        "agentDevice": "gesture drag",
+        "argent": "gesture-drag, gesture-custom with moves",
+        "parallax": "device_drag"
+      },
+      "pinch": {
+        "axe": "gesture pinch/rotate",
+        "agentDevice": "gesture pinch/rotate/transform",
+        "argent": "gesture-pinch, gesture-rotate",
+        "parallax": null
+      }
+    },
+    "argentRunSequence": "each gesture step of Argent's run-sequence and of AXe's batch counts as one call of its kind; AXe's agent refs (--ref) are never resolved: their target is unknown",
+    "remapOnCutoff": "the table is re-read against each pinned tool's tools/list on the cut-off day; a change is listed as a deviation",
+    "failed": "the tool result is an error, or the tool says nothing changed (Parallax's no-change answer, agent-device's '+0 -0' diff); Argent: errors only",
+    "repeated": "same kind, same target or a start point within 20 pt, no edit and no reload in between; each extra call once; how many repeats then landed is reported",
+    "wrongTarget": "start point outside the frozen frame of the task's element, or a selector naming another element; refs resolved from the snapshot before the call; unresolvable calls counted as unknown, never as right",
+    "unconfirmed": "a gesture the tool reported as done that changed nothing on the run's screen recording",
+    "solvedWithoutGesture": "fixed (outcome >= 2) with no gesture call"
+  },
+  "taskRule": {
+    "statement": "A gesture task where at least 2 of 3 fixed runs, pooled over all arms, made no gesture call is 'solvable from the source'.",
+    "effect": "it is reported on its own row and left out of the pooled gesture numbers and of H1 and H2; G4 is expected to be one"
+  },
+  "H1": {
+    "statement": "On the gesture tasks the setup changes the outcome (R1's ceiling does not hold).",
+    "falsifiedIf": {
+      "all": [
+        "fixed(best arm) - fixed(worst arm) < 3, over the pooled gesture runs per arm (21, fewer when the task rule leaves a task out)",
+        "median of (failed + repeated gesture calls) per run of the worst arm < 2 * that of the best arm",
+        "confidentWrong(worst arm) - confidentWrong(best arm) < 2"
+      ]
+    }
+  },
+  "H2": {
+    "statement": "With beta.13's long press, drag and swipe from a point, Parallax (A3) is not behind the other setups on the gesture tasks.",
+    "falsifiedIf": {
+      "any": [
+        "fixed(A3) < max(fixed(A0), fixed(A1), fixed(A2)) - 1, pooled over the gesture tasks",
+        "failed gesture calls per gesture call of A3 > the highest of A0, A1 and A2",
+        "wrong-target actions of A3 > the highest of A0, A1 and A2",
+        "median warm cost of A3 > 1.15 * the lowest median warm cost of A0, A1 and A2, pooled over the gesture tasks"
+      ]
+    }
+  },
+  "expected": "Not hypotheses; written down so the report can say whether they held. Parallax has no scroll-until and no pinch: more calls on G1 and G7. Argent has no scroll-until and on iOS composes long press and drag from gesture-custom: more calls on G1, G3 and G4. No tool has a pull-to-refresh action: every arm composes G5 from a swipe. G4 is expected to be solved from the source.",
+  "controls": "C1 and B4, one run per arm, reported only, not in H1 or H2: with one run per arm there is no spread to compare (R2's H2 read a single control run against three runs and was falsified on all three controls)",
+  "notCounted": [
+    "a run the transcript scan flags (git use, a path outside the app, a key file's name)",
+    "a run whose preflight or warm start fails before the agent's first call",
+    "a run during which a new backboardd or SpringBoard crash report appears (the batch stops)",
+    "a run whose simulator was not clean at the start",
+    "a harness failure: Metro or the mock API did not start, or the check could not launch the app"
+  ],
+  "notCountedRule": "a run that does not count is run again until its cell has a counted run; every set-aside run is listed with its reason. A run that hits a limit counts, as outcome 0.",
+  "coldStart": {
+    "tool": "without an agent: each tool from a rebooted simulator and a stopped server, daemon or runner to its first landed tap and first landed swipe, 5 times each (R1's cold-start.mjs with one swipe added); every run also logs its warm-start steps and their times, and the transcript gives the time to the first landed gesture",
+    "model": "cold or warm read from each run's first model call; sessions 65 minutes apart; plus a computed row per run (the first call's cache-read tokens priced as cache writes), labelled as computed"
+  },
+  "reported": "every task on its own and pooled over the gesture tasks; per arm: outcome levels, cost and cost per fix, the four token kinds, wall time, gesture calls by kind, failed, repeated (and how many landed after), wrong-target (and unknown), unconfirmed, solved without a gesture, confident wrong answers, blind grade against keyword score, tool surface; deviations from this pre-registration in their own section"
+}
